@@ -25,7 +25,7 @@ public final class QueryUtils {
     private QueryUtils(){
 
     }
-    public static String FetchBookData(String requestURL){
+    public static String fetchBookData(String requestURL){
         try{
             Thread.sleep(2000);
         }catch (InterruptedException e){
@@ -36,6 +36,7 @@ public final class QueryUtils {
         String jsonResponse = null;
         try{
             jsonResponse = makeHttpRequest(url);
+            Log.v("QueryUtils", "JSON response is: " + jsonResponse);
         } catch(IOException e) {
             Log.e(LOG_TAG, "Error fetching book data ", e);
         }
@@ -112,29 +113,25 @@ public final class QueryUtils {
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
             JSONObject bookObject = new JSONObject(bookData);
-            JSONArray features = bookObject.getJSONArray("features");
-            for(int i = 0; i < features.length(); i++){
-                JSONObject tempFeaturesObject = features.getJSONObject(i);
-                JSONObject tempPropertiesObject = tempFeaturesObject.getJSONObject("properties");
-                double magnitude = tempPropertiesObject.getDouble("mag");
-                String place = tempPropertiesObject.getString("place");
-                Long time = tempPropertiesObject.getLong("time");
-                String earthquakeUrl = tempPropertiesObject.getString("url");
-//                Log.v("QueryUtils", "earthquakeUrl:  " + earthquakeUrl);
-                earthquakes.add(new Earthquake(magnitude, place, time, earthquakeUrl));
-//                Log.v("QueryUtils", "value of earthQuakes" + earthquakes);
+            JSONArray items = bookObject.getJSONArray("items");
+            for(int i = 0; i < items.length(); i++){
+                JSONObject tempItemsObject = items.getJSONObject(i);
+                JSONObject tempVolumeInfoObject = tempItemsObject.getJSONObject("volumeInfo");
+                String tempTitleString = tempVolumeInfoObject.getString("title");
+                Log.v("QueryUtils", "tempTitleString:  " + tempTitleString);
+                // build up a list of Book objects with the corresponding data.
+                books.add(new Book(tempTitleString));
             }
 
-            // build up a list of Earthquake objects with the corresponding data.
+
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the book JSON results", e);
         }
 
-        // Return the list of earthquakes
-        return earthquakes;
+        return books;
     }
 }

@@ -11,6 +11,10 @@ public class Book {
         mTitle = title;
     }
 
+    public String getTitle(){
+        return mTitle;
+    }
+
     @Override
     public String toString(){
         return "Book{" +

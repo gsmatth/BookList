@@ -2,6 +2,9 @@ package com.example.android.booklist;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.util.Log;
+import java.util.ArrayList;
+
+import java.util.ArrayList;
 
 import static com.example.android.booklist.BookListActivity.BASE_BOOK_QUERY_URL;
 

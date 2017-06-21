@@ -20,7 +20,7 @@ import static android.R.attr.value;
 
 public class BookListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Book>> {
 
-    public static final String BASE_BOOK_QUERY_URL = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=1";
+    public static final String BASE_BOOK_QUERY_URL = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=4";
     //public static final String BOOK_QUERY_URL = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=1&fields=kind,items(title)";
     private ProgressBar mProgress;
 

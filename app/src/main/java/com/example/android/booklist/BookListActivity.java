@@ -9,19 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.R.attr.value;
 
 public class BookListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Book>> {
 
-    public static final String BASE_BOOK_QUERY_URL = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=4";
-    //public static final String BOOK_QUERY_URL = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=1&fields=kind,items(title)";
+    public static String FULL_QUERY_URL = null;
     private ProgressBar mProgress;
 
     @Override
@@ -41,6 +38,18 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
             final ListView bookListView = (ListView) findViewById(R.id.book_list);
             bookListView.setEmptyView(findViewById(R.id.empty_book_list_view));
         }
+    }
+
+    public void getBookList(View view){
+        String BASE_BOOK_QUERY_URL = "https://www.googleapis.com/books/v1/volumes?q=";
+        int searchId = R.id.book_query_text_input;
+        EditText searchTermObject = (EditText)  findViewById(searchId);
+        String searchTermString = searchTermObject.getText().toString();
+        String requestUrl = BASE_BOOK_QUERY_URL + searchTermString;
+        Log.v("BookListActivity", "The full url string is: " + requestUrl);
+        FULL_QUERY_URL = requestUrl;
+        //BookLoader.loadInBackground();
+//        return requestUrl;
     }
 
     @Override

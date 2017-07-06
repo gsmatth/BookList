@@ -1,5 +1,6 @@
 package com.example.android.booklist;
-import android.util.Log;
+import android.util.Log;;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +16,10 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
+import static android.R.attr.id;
+import static com.example.android.booklist.R.id.book_query_text_input;
+
+
 /**
  * Created by djp on 6/19/17.
  */
@@ -25,6 +30,8 @@ public final class QueryUtils {
     private QueryUtils(){
 
     }
+
+
     public static String fetchBookData(String requestURL){
         try{
             Thread.sleep(2000);

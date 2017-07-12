@@ -82,7 +82,8 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
     }
 
     private void updateUI(ArrayList books){
-        Log.v("BookListActivity", "updateUI entered");
+        Log.v("BookListActivity", "updateUI entered" );
+        Log.v("BookListActivity", "value of books parameter passed into updateUI: " + books);
         final ListView bookListView = (ListView) findViewById(R.id.book_list);
         Log.v("BookListActivity", "updateUI entered, bookListView: " + bookListView);
         bookListView.setEmptyView(findViewById(R.id.empty_book_list_view));

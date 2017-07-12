@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.example.android.booklist.R.id.book_authors;
+import static com.example.android.booklist.R.id.book_publisher;
 import static com.example.android.booklist.R.id.book_title;
 
 /**
@@ -36,20 +38,13 @@ public class BookAdapter extends ArrayAdapter<Book> {
         String mTitleString = currentBookObject.getTitle();
         titleView.setText(mTitleString);
 
-//        TextView locationLineTwoView = (TextView) listItemView.findViewById(R.id.location_line_2);
-//        String mInitialStringTwo = currentEarthquakeObject.getLocation();
-//        if (mInitialStringTwo.contains("of") == true){
-//            int offset = mInitialString.indexOf("of") + 2;
-//            mSecondaryString = mInitialString.substring(offset + 1);
-//            locationLineTwoView.setText(mSecondaryString);
+        TextView publisherView = (TextView) listItemView.findViewById(book_publisher);
+        String mPublisherString = currentBookObject.getPublisher();
+        publisherView.setText(mPublisherString);
 
-
-//        TextView eventDateView = (TextView) listItemView.findViewById(R.id.event_date);
-//        eventDateView.setText(currentEarthquakeObject.getEventDate());
-//
-//        TextView eventTimeView = (TextView) listItemView.findViewById(R.id.event_time);
-//        eventTimeView.setText(currentEarthquakeObject.getEventTime());
-//        //return listItemView(earthquake_item) to caller, which is the ListView
+        TextView authorsView = (TextView) listItemView.findViewById(book_authors);
+        String mAuthorsString = currentBookObject.getAuthors();
+        authorsView.setText(mAuthorsString);
 
         return listItemView;
 

@@ -23,33 +23,33 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.book_list_activity);
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+    public void getBookList(View view){
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.book_list_activity);
         if(isConnected == true){
             Log.v("BookListActivity", "isConnected == TRUE");
             mProgress = (ProgressBar) findViewById(R.id.loading_spinner);
-            getLoaderManager().initLoader(0, null, this);
+            String BASE_BOOK_QUERY_URL = "https://www.googleapis.com/books/v1/volumes?q=";
+            int searchId = R.id.book_query_text_input;
+            EditText searchTermObject = (EditText)  findViewById(searchId);
+            String searchTermString = searchTermObject.getText().toString();
+            String requestUrl = BASE_BOOK_QUERY_URL + searchTermString;
+            Log.v("BookListActivity", "The full url string is: " + requestUrl);
+            FULL_QUERY_URL = requestUrl;
+            Log.v("BookListActivity", "The FULL_QUERY_URL is: " + FULL_QUERY_URL);
+            getLoaderManager().restartLoader(0, null, this);
         } else {
             Log.v("BookListActivity", "isConnected == false");
             final ListView bookListView = (ListView) findViewById(R.id.book_list);
             bookListView.setEmptyView(findViewById(R.id.empty_book_list_view));
         }
-    }
-
-    public void getBookList(View view){
-        String BASE_BOOK_QUERY_URL = "https://www.googleapis.com/books/v1/volumes?q=";
-        int searchId = R.id.book_query_text_input;
-        EditText searchTermObject = (EditText)  findViewById(searchId);
-        String searchTermString = searchTermObject.getText().toString();
-        String requestUrl = BASE_BOOK_QUERY_URL + searchTermString;
-        Log.v("BookListActivity", "The full url string is: " + requestUrl);
-        FULL_QUERY_URL = requestUrl;
-        //BookLoader.loadInBackground();
-//        return requestUrl;
     }
 
     @Override
@@ -82,7 +82,8 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
     }
 
     private void updateUI(ArrayList books){
-        Log.v("BookListActivity", "updateUI entered");
+        Log.v("BookListActivity", "updateUI entered" );
+        Log.v("BookListActivity", "value of books parameter passed into updateUI: " + books);
         final ListView bookListView = (ListView) findViewById(R.id.book_list);
         Log.v("BookListActivity", "updateUI entered, bookListView: " + bookListView);
         bookListView.setEmptyView(findViewById(R.id.empty_book_list_view));

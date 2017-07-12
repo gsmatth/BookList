@@ -125,9 +125,18 @@ public final class QueryUtils {
                 JSONObject tempItemsObject = items.getJSONObject(i);
                 JSONObject tempVolumeInfoObject = tempItemsObject.getJSONObject("volumeInfo");
                 String tempTitleString = tempVolumeInfoObject.getString("title");
+                String tempPublisherString = tempVolumeInfoObject.getString("publisher");
+                JSONArray tempAuthorsJSONArray = tempVolumeInfoObject.getJSONArray("authors");
+                String authorList = tempAuthorsJSONArray.join(", ").replaceAll("\"", "");
+//                String sortedAuthorString = authorList.replaceAll("\"", "");
+
                 Log.v("QueryUtils", "tempTitleString:  " + tempTitleString);
+                Log.v("QueryUtils", "tempPublisherString:  " + tempPublisherString);
+                Log.v("QueryUtils", "authorlist:  " + authorList);
+//                Log.v("QueryUtils", "sortedString:  " + sortedAuthorString);
+
                 // build up a list of Book objects with the corresponding data.
-                books.add(new Book(tempTitleString));
+                books.add(new Book(tempTitleString, tempPublisherString, authorList));
             }
 
 
@@ -141,4 +150,5 @@ public final class QueryUtils {
 
         return books;
     }
+
 }

@@ -70,7 +70,7 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
         loadProgressIndicator.setVisibility(View.GONE);
 
         TextView emptyListViewText = (TextView) findViewById(R.id.empty_book_list_view);
-        emptyListViewText.setText("No books found matching your search term");
+        emptyListViewText.setVisibility(View.VISIBLE);
 
         updateUI(books);
 

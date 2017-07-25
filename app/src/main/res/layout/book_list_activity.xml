@@ -5,24 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingLeft="@dimen/app_padding_left"
+    android:paddingRight="@dimen/app_padding_right"
     tools:context="com.example.android.booklist.BookListActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/book_query_text_input"
-            android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/search_margin_bottom">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textNoSuggestions"
-            android:imeOptions="actionSearch"
-            android:hint="search term"/>
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="65dp"
-            android:text="Search"
-            android:onClick="getBookList"/>
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/book_query_text_input"
+                android:layout_width="@dimen/search_text_entry_width"
+                android:layout_height="wrap_content"
+                android:inputType="textNoSuggestions"
+                android:imeOptions="actionSearch"
+                android:hint="@string/search_hint"/>
+            <Button
+                android:layout_width="@dimen/search_button_width"
+                android:layout_height="@dimen/search_button_height"
+                android:layout_marginLeft="@dimen/search_button_margin_left"
+                android:text="@string/search_button"
+                android:onClick="getBookList"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/search_description"/>
     </LinearLayout>
     <ListView
         android:id="@+id/book_list"

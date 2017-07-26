@@ -35,7 +35,13 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
 
         if(isConnected == true){
             Log.v("BookListActivity", "isConnected == TRUE");
-            mProgress = (ProgressBar) findViewById(R.id.loading_spinner);
+            ListView bookListView = (ListView) findViewById(R.id.book_list);
+            bookListView.setVisibility(View.GONE);
+            ProgressBar loadProgressIndicator = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadProgressIndicator.setVisibility(View.VISIBLE);
+            mProgress = loadProgressIndicator;
+
+//            mProgress = (ProgressBar) findViewById(R.id.loading_spinner);
             String BASE_BOOK_QUERY_URL = "https://www.googleapis.com/books/v1/volumes?q=";
             int searchId = R.id.book_query_text_input;
             EditText searchTermObject = (EditText)  findViewById(searchId);

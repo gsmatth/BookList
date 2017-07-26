@@ -116,31 +116,43 @@ public final class QueryUtils {
         try {
             JSONObject bookObject = new JSONObject(bookData);
             JSONArray items = bookObject.getJSONArray("items");
-            String tempPublisherString;
+            String tempTitleString="";
+            String tempPublisherString="";
+            String authorsList="";
             for(int i = 0; i < items.length(); i++){
                 JSONObject tempItemsObject = items.getJSONObject(i);
                 JSONObject tempVolumeInfoObject = tempItemsObject.getJSONObject("volumeInfo");
-                String tempTitleString = tempVolumeInfoObject.getString("title");
+                try {
+                    tempTitleString = tempVolumeInfoObject.getString("title");
+                } catch(JSONException e){
+                    if (e.getMessage().equals("No value for title")) {
+                        tempTitleString="No Ttitle Listed";
+                    }
+                }
                 try {
                     tempPublisherString = tempVolumeInfoObject.getString("publisher");
                 } catch(JSONException e){
-                    tempPublisherString = "No Publisher Listed";
+                    if(e.getMessage().equals("No value for publisher")) {
+                        tempPublisherString = "No Publisher Listed";
+                    }
                 }
-                JSONArray tempAuthorsJSONArray = tempVolumeInfoObject.getJSONArray("authors");
-                String authorList = tempAuthorsJSONArray.join(", ").replaceAll("\"", "");
-
+                try{
+                    JSONArray tempAuthorsJSONArray = tempVolumeInfoObject.getJSONArray("authors");
+                    authorsList = tempAuthorsJSONArray.join(", ").replaceAll("\"", "");
+                }catch(JSONException e){
+                    if(e.getMessage().equals("No value for authors")){
+                        authorsList = "No Authors Listed";
+                    }
+                }
                 Log.v("QueryUtils", "tempTitleString:  " + tempTitleString);
                 Log.v("QueryUtils", "tempPublisherString:  " + tempPublisherString);
-                Log.v("QueryUtils", "authorlist:  " + authorList);
+                Log.v("QueryUtils", "authorlist:  " + authorsList);
 
                 // build up a list of Book objects with the corresponding data.
-                books.add(new Book(tempTitleString, tempPublisherString, authorList));
+                books.add(new Book(tempTitleString, tempPublisherString, authorsList));
             }
 
         } catch (JSONException e) {
-            // If an error is thrown when executing any of the above statements in the "try" block,
-            // catch the exception here, so the app doesn't crash. Print a log message
-            // with the message from the exception.
             Log.e("QueryUtils", "Problem parsing the book JSON results", e);
         }
 

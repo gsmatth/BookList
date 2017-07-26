@@ -113,17 +113,19 @@ public final class QueryUtils {
         // Create an empty ArrayList that we can start adding books to
         ArrayList<Book> books = new ArrayList<>();
 
-        // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON
-        // is formatted, a JSONException exception object will be thrown.
-        // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
             JSONObject bookObject = new JSONObject(bookData);
             JSONArray items = bookObject.getJSONArray("items");
+            String tempPublisherString;
             for(int i = 0; i < items.length(); i++){
                 JSONObject tempItemsObject = items.getJSONObject(i);
                 JSONObject tempVolumeInfoObject = tempItemsObject.getJSONObject("volumeInfo");
                 String tempTitleString = tempVolumeInfoObject.getString("title");
-                String tempPublisherString = tempVolumeInfoObject.getString("publisher");
+                try {
+                    tempPublisherString = tempVolumeInfoObject.getString("publisher");
+                } catch(JSONException e){
+                    tempPublisherString = "No Publisher Listed";
+                }
                 JSONArray tempAuthorsJSONArray = tempVolumeInfoObject.getJSONArray("authors");
                 String authorList = tempAuthorsJSONArray.join(", ").replaceAll("\"", "");
 

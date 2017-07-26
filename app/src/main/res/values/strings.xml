@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BookList</string>
+    <string name="title_heading">Title:</string>
+    <string name="publisher_heading">Publisher:</string>
+    <string name="authors_heading">Authors:</string>
+    <string name="search_hint">search term</string>
+    <string name="search_button">Search</string>
+    <string name="search_description">Enter a search term to obtain a list of matching eBooks
+        in Google Books service.</string>
+    <string name="empty_search_results">No ebook titles match your search term, try entering a new search term</string>
 </resources>

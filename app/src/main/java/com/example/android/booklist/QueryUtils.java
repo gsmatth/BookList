@@ -110,8 +110,6 @@ public final class QueryUtils {
     }
 
     public static ArrayList<Book> extractBooks(String bookData) {
-
-
         // Create an empty ArrayList that we can start adding books to
         ArrayList<Book> books = new ArrayList<>();
 
@@ -128,18 +126,14 @@ public final class QueryUtils {
                 String tempPublisherString = tempVolumeInfoObject.getString("publisher");
                 JSONArray tempAuthorsJSONArray = tempVolumeInfoObject.getJSONArray("authors");
                 String authorList = tempAuthorsJSONArray.join(", ").replaceAll("\"", "");
-//                String sortedAuthorString = authorList.replaceAll("\"", "");
 
                 Log.v("QueryUtils", "tempTitleString:  " + tempTitleString);
                 Log.v("QueryUtils", "tempPublisherString:  " + tempPublisherString);
                 Log.v("QueryUtils", "authorlist:  " + authorList);
-//                Log.v("QueryUtils", "sortedString:  " + sortedAuthorString);
 
                 // build up a list of Book objects with the corresponding data.
                 books.add(new Book(tempTitleString, tempPublisherString, authorList));
             }
-
-
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,

@@ -12,50 +12,56 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/search_margin_bottom">
+        android:layout_marginBottom="@dimen/search_margin_bottom"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/book_query_text_input"
                 android:layout_width="@dimen/search_text_entry_width"
                 android:layout_height="wrap_content"
-                android:inputType="textNoSuggestions"
+                android:hint="@string/search_hint"
                 android:imeOptions="actionSearch"
-                android:hint="@string/search_hint"/>
+                android:inputType="textNoSuggestions" />
+
             <Button
                 android:layout_width="@dimen/search_button_width"
                 android:layout_height="@dimen/search_button_height"
                 android:layout_marginLeft="@dimen/search_button_margin_left"
-                android:text="@string/search_button"
-                android:onClick="getBookList"/>
+                android:onClick="getBookList"
+                android:text="@string/search_button" />
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/search_description"/>
+            android:text="@string/search_description" />
     </LinearLayout>
+
     <ProgressBar
         android:id="@+id/loading_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minWidth="250dp"
         android:indeterminate="true"
+        android:minWidth="250dp"
         android:visibility="gone" />
+
     <ListView
         android:id="@+id/book_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-    </ListView>
+        android:orientation="vertical"></ListView>
+
     <TextView
         android:id="@+id/empty_book_list_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/empty_search_results"
         android:layout_centerInParent="true"
+        android:text="@string/empty_search_results"
         android:textSize="24sp"
         android:visibility="gone" />
 

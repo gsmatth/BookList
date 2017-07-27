@@ -28,12 +28,12 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
         getLoaderManager().initLoader(0, null, this);
     }
 
-    public void getBookList(View view){
+    public void getBookList(View view) {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
-        if(isConnected == true){
+        if (isConnected == true) {
             Log.v("BookListActivity", "isConnected == TRUE");
             ListView bookListView = (ListView) findViewById(R.id.book_list);
             bookListView.setVisibility(View.GONE);
@@ -44,7 +44,7 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
 //            mProgress = (ProgressBar) findViewById(R.id.loading_spinner);
             String BASE_BOOK_QUERY_URL = "https://www.googleapis.com/books/v1/volumes?q=";
             int searchId = R.id.book_query_text_input;
-            EditText searchTermObject = (EditText)  findViewById(searchId);
+            EditText searchTermObject = (EditText) findViewById(searchId);
             String searchTermString = searchTermObject.getText().toString();
             String requestUrl = BASE_BOOK_QUERY_URL + searchTermString;
             Log.v("BookListActivity", "The full url string is: " + requestUrl);
@@ -67,7 +67,7 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
     @Override
     public void onLoadFinished(Loader<ArrayList<Book>> loader, ArrayList<Book> books) {
         Log.v("BookListActivity", "onLoadFinished called");
-        if(books == null){
+        if (books == null) {
             Log.v("BookListActivity", "onLoadFinished was passed a null value for books parameter");
             return;
         }
@@ -87,8 +87,8 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
 
     }
 
-    private void updateUI(ArrayList books){
-        Log.v("BookListActivity", "updateUI entered" );
+    private void updateUI(ArrayList books) {
+        Log.v("BookListActivity", "updateUI entered");
         Log.v("BookListActivity", "value of books parameter passed into updateUI: " + books);
         final ListView bookListView = (ListView) findViewById(R.id.book_list);
         Log.v("BookListActivity", "updateUI entered, bookListView: " + bookListView);

@@ -61,10 +61,8 @@ public final class QueryUtils {
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
         if (url == null) {
-            Log.v(LOG_TAG, "url is null, quitting makeHttpRequest");
             return jsonResponse;
         }
-        Log.v(LOG_TAG, "url is not null, entering makeHttpRequest");
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
         try {
@@ -139,11 +137,6 @@ public final class QueryUtils {
                     authorsList = tempAuthorsJSONArray.join(", ").replaceAll("\"", "");
                 }
 
-//                Log.v("QueryUtils", "tempTitleString:  " + tempTitleString);
-//                Log.v("QueryUtils", "tempPublisherString:  " + tempPublisherString);
-//                Log.v("QueryUtils", "authorlist:  " + authorsList);
-
-                // build up a list of Book objects with the corresponding data.
                 books.add(new Book(tempTitleString, tempPublisherString, authorsList));
             }
         } catch (JSONException e) {

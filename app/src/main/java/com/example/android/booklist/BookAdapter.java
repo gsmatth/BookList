@@ -32,7 +32,6 @@ public class BookAdapter extends ArrayAdapter<Book> {
 
         Book currentBookObject = getItem(position);
 
-        //bind object data to views
         TextView titleView = (TextView) listItemView.findViewById(book_title);
         String mTitleString = currentBookObject.getTitle();
         titleView.setText(mTitleString);

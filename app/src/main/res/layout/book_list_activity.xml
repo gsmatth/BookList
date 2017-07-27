@@ -25,7 +25,6 @@
                 android:layout_width="@dimen/search_text_entry_width"
                 android:layout_height="wrap_content"
                 android:hint="@string/search_hint"
-                android:imeOptions="actionSearch"
                 android:inputType="textNoSuggestions" />
 
             <Button

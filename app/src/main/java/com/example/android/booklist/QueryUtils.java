@@ -44,7 +44,7 @@ public final class QueryUtils {
         String jsonResponse = null;
         try{
             jsonResponse = makeHttpRequest(url);
-            Log.v("QueryUtils", "JSON response is: " + jsonResponse);
+//            Log.v("QueryUtils", "JSON response is: " + jsonResponse);
         } catch(IOException e) {
             Log.e(LOG_TAG, "Error fetching book data ", e);
         }
@@ -111,7 +111,6 @@ public final class QueryUtils {
     }
 
     public static ArrayList<Book> extractBooks(String bookData) {
-        // Create an empty ArrayList that we can start adding books to
         ArrayList<Book> books = new ArrayList<>();
 
         try {
@@ -126,15 +125,14 @@ public final class QueryUtils {
 
                 if (!tempVolumeInfoObject.has("title")) {
                     tempTitleString = "No Title Listed";
-
                 } else {
                     tempTitleString = tempVolumeInfoObject.getString("title");
                 }
 
                 if (!tempVolumeInfoObject.has("publisher")) {
                     tempPublisherString = "No Publisher Listed";
-                    } else {
-                        tempPublisherString = tempVolumeInfoObject.getString("publisher");
+                } else {
+                    tempPublisherString = tempVolumeInfoObject.getString("publisher");
                     }
 
                 if (!tempVolumeInfoObject.has("authors")) {
@@ -144,14 +142,13 @@ public final class QueryUtils {
                     authorsList = tempAuthorsJSONArray.join(", ").replaceAll("\"", "");
                 }
 
-                Log.v("QueryUtils", "tempTitleString:  " + tempTitleString);
-                Log.v("QueryUtils", "tempPublisherString:  " + tempPublisherString);
-                Log.v("QueryUtils", "authorlist:  " + authorsList);
+//                Log.v("QueryUtils", "tempTitleString:  " + tempTitleString);
+//                Log.v("QueryUtils", "tempPublisherString:  " + tempPublisherString);
+//                Log.v("QueryUtils", "authorlist:  " + authorsList);
 
                 // build up a list of Book objects with the corresponding data.
                 books.add(new Book(tempTitleString, tempPublisherString, authorsList));
             }
-
         } catch (JSONException e) {
             Log.e("QueryUtils", "Problem parsing the book JSON results", e);
         }

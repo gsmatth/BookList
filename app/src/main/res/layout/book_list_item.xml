@@ -14,12 +14,11 @@
             android:id="@+id/title"
             style="@style/search_results_heading"
             android:text="@string/title_heading"
-            android:paddingRight="50dp"/>
+          />
         <TextView
             android:id="@+id/book_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/search_results_text_size"/>
+            style="@style/search_results_text"
+            android:paddingLeft="18dp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,13 +27,11 @@
         <TextView
             android:id="@+id/publisher"
             style="@style/search_results_heading"
-            android:text="@string/publisher_heading"
-            android:paddingRight="10dp"/>
+            android:text="@string/publisher_heading" />
         <TextView
             android:id="@+id/book_publisher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/search_results_text_size"/>
+            style="@style/search_results_text"
+            android:paddingLeft="8dp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,12 +40,10 @@
         <TextView
             android:id="@+id/authors"
             style="@style/search_results_heading"
-            android:text="@string/authors_heading"
-            android:paddingRight="20dp"/>
+            android:text="@string/authors_heading" />
         <TextView
             android:id="@+id/book_authors"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/search_results_text_size"/>
+            style="@style/search_results_text"
+            android:paddingLeft="18dp" />
     </LinearLayout>
 </LinearLayout>

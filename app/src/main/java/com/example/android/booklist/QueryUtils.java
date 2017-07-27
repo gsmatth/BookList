@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import static android.R.attr.id;
 import static com.example.android.booklist.R.id.book_query_text_input;
+import static com.example.android.booklist.R.id.publisher;
 
 
 /**
@@ -122,28 +123,27 @@ public final class QueryUtils {
             for(int i = 0; i < items.length(); i++){
                 JSONObject tempItemsObject = items.getJSONObject(i);
                 JSONObject tempVolumeInfoObject = tempItemsObject.getJSONObject("volumeInfo");
-                try {
+
+                if (!tempVolumeInfoObject.has("title")) {
+                    tempTitleString = "No Title Listed";
+
+                } else {
                     tempTitleString = tempVolumeInfoObject.getString("title");
-                } catch(JSONException e){
-                    if (e.getMessage().equals("No value for title")) {
-                        tempTitleString="No Ttitle Listed";
-                    }
                 }
-                try {
-                    tempPublisherString = tempVolumeInfoObject.getString("publisher");
-                } catch(JSONException e){
-                    if(e.getMessage().equals("No value for publisher")) {
-                        tempPublisherString = "No Publisher Listed";
+
+                if (!tempVolumeInfoObject.has("publisher")) {
+                    tempPublisherString = "No Publisher Listed";
+                    } else {
+                        tempPublisherString = tempVolumeInfoObject.getString("publisher");
                     }
-                }
-                try{
+
+                if (!tempVolumeInfoObject.has("authors")) {
+                    authorsList = "No Authors Listed";
+                } else {
                     JSONArray tempAuthorsJSONArray = tempVolumeInfoObject.getJSONArray("authors");
                     authorsList = tempAuthorsJSONArray.join(", ").replaceAll("\"", "");
-                }catch(JSONException e){
-                    if(e.getMessage().equals("No value for authors")){
-                        authorsList = "No Authors Listed";
-                    }
                 }
+
                 Log.v("QueryUtils", "tempTitleString:  " + tempTitleString);
                 Log.v("QueryUtils", "tempPublisherString:  " + tempPublisherString);
                 Log.v("QueryUtils", "authorlist:  " + authorsList);

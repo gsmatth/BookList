@@ -6,8 +6,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import java.util.ArrayList;
-
 import static com.example.android.booklist.BookListActivity.FULL_QUERY_URL;
 
 /**

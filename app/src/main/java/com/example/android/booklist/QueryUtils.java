@@ -17,10 +17,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-import static android.R.attr.id;
-import static com.example.android.booklist.R.id.book_query_text_input;
-import static com.example.android.booklist.R.id.publisher;
-
 
 /**
  * Created by djp on 6/19/17.

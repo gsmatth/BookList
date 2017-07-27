@@ -1,9 +1,5 @@
 package com.example.android.booklist;
 
-import org.json.JSONArray;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 /**
  * Created by djp on 6/20/17.

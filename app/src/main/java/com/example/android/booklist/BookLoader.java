@@ -2,7 +2,6 @@ package com.example.android.booklist;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -28,7 +27,6 @@ public class BookLoader extends AsyncTaskLoader<ArrayList<Book>> {
             return null;
         }
         final String bookData = QueryUtils.fetchBookData(FULL_QUERY_URL);
-        final ArrayList<Book> books = QueryUtils.extractBooks(bookData);
-        return books;
+        return QueryUtils.extractBooks(bookData);
     }
 }

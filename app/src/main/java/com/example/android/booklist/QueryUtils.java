@@ -24,24 +24,18 @@ import java.util.ArrayList;
 
 public final class QueryUtils {
     public static final String LOG_TAG = QueryUtils.class.getSimpleName();
-
+//an empty constructor makes sure that the class is not going to be initialized
     private QueryUtils() {
 
     }
 
 
     public static String fetchBookData(String requestURL) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         URL url = createUrl(requestURL);
 
         String jsonResponse = null;
         try {
             jsonResponse = makeHttpRequest(url);
-//            Log.v("QueryUtils", "JSON response is: " + jsonResponse);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error fetching book data ", e);
         }
@@ -60,6 +54,9 @@ public final class QueryUtils {
 
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
+        int readTimeout = 5000;
+        int connectTimeout = 10000;
+
         if (url == null) {
             return jsonResponse;
         }
@@ -67,8 +64,8 @@ public final class QueryUtils {
         InputStream inputStream = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(5000);
-            urlConnection.setConnectTimeout(10000);
+            urlConnection.setReadTimeout(readTimeout);
+            urlConnection.setConnectTimeout(connectTimeout);
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 

@@ -8,4 +8,6 @@
     <string name="search_description">Enter a search term to obtain a list of matching eBooks
         in Google Books service.</string>
     <string name="empty_search_results">No ebook titles match your search term, try entering a new search term</string>
+    <string name="no_connectivity_warning">Your system does not have connectivity at this time.
+    Please check wifi settings and also check to see that you do not have Airplane Mode on.</string>
 </resources>

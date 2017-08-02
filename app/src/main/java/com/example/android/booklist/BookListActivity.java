@@ -8,14 +8,16 @@ import android.content.Loader;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 
 import java.util.ArrayList;
 
@@ -56,6 +58,8 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
         if (isConnected == true) {
             ListView bookListView = (ListView) findViewById(R.id.book_list);
             bookListView.setVisibility(View.GONE);
+            final TextView noConnectivityView = (TextView) findViewById(R.id.no_connectivity_view);
+            noConnectivityView.setVisibility(View.GONE);
             ProgressBar loadProgressIndicator = (ProgressBar) findViewById(R.id.loading_spinner);
             loadProgressIndicator.setVisibility(View.VISIBLE);
             mProgress = loadProgressIndicator;
@@ -69,7 +73,9 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
             getLoaderManager().restartLoader(0, null, this);
         } else {
             final ListView bookListView = (ListView) findViewById(R.id.book_list);
-            bookListView.setEmptyView(findViewById(R.id.empty_book_list_view));
+            bookListView.setVisibility(View.GONE);
+            final TextView noConnectivityView = (TextView) findViewById(R.id.no_connectivity_view);
+            noConnectivityView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -99,7 +105,7 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
     }
 
     private void updateUI(ArrayList books) {
-        final ListView bookListView = (ListView) findViewById(R.id.book_list);;
+        final ListView bookListView = (ListView) findViewById(R.id.book_list);
         bookListView.setEmptyView(findViewById(R.id.empty_book_list_view));
         final BookAdapter itemsAdapter = new BookAdapter(BookListActivity.this, books);
         bookListView.setAdapter(itemsAdapter);

@@ -16,4 +16,6 @@
     <string name="settings_search_max_results_label">Max Results</string>
     <string name="settings_search_max_results_key" translatable="false">max_results</string>
     <string name="settings_search_max_results_default" translatable="false">10</string>
+    <string name="no_connectivity_warning">Your system does not have connectivity at this time.
+    Please check wifi settings and also check to see that you do not have Airplane Mode on.</string>
 </resources>

@@ -2,11 +2,20 @@ package com.example.android.booklist;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.content.Loader;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,6 +35,23 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_list_activity);
         getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == R.id.action_settings){
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void getBookList(View view) {
@@ -48,6 +74,23 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
             String searchTermString = searchTermObject.getText().toString();
             String requestUrl = BASE_BOOK_QUERY_URL + searchTermString;
             FULL_QUERY_URL = requestUrl;
+            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String maxResults = sharedPrefs.getString(
+                    getString(R.string.settings_search_max_results_key),
+                    getString(R.string.settings_search_max_results_default));
+//            String sortingMethod = sharedPrefs.getString(
+//                    getString(R.string.settings_sorting_order_key),
+//                    getString(R.string.settings_sorting_order_default));
+            String sortingMethod = sharedPrefs.getString(
+                    getString(R.string.settings_sorting_order_key),
+                    getString(R.string.settings_sorting_order_default)
+            );
+            Uri baseUri = Uri.parse(FULL_QUERY_URL);
+            Uri.Builder uriBuilder = baseUri.buildUpon();
+            uriBuilder.appendQueryParameter("maxResults", maxResults);
+            uriBuilder.appendQueryParameter("orderBy", sortingMethod );
+            Log.v("URIBUILDER     ", "the value of the uri is:  " + uriBuilder);
+            FULL_QUERY_URL = uriBuilder.toString();
             getLoaderManager().restartLoader(0, null, this);
         } else {
             final ListView bookListView = (ListView) findViewById(R.id.book_list);
@@ -84,7 +127,6 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
 
     private void updateUI(ArrayList books) {
         final ListView bookListView = (ListView) findViewById(R.id.book_list);
-        ;
         bookListView.setEmptyView(findViewById(R.id.empty_book_list_view));
         final BookAdapter itemsAdapter = new BookAdapter(BookListActivity.this, books);
         bookListView.setAdapter(itemsAdapter);

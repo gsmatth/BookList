@@ -3,12 +3,16 @@ package com.example.android.booklist;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.content.Loader;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -70,6 +74,23 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
             String searchTermString = searchTermObject.getText().toString();
             String requestUrl = BASE_BOOK_QUERY_URL + searchTermString;
             FULL_QUERY_URL = requestUrl;
+            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String maxResults = sharedPrefs.getString(
+                    getString(R.string.settings_search_max_results_key),
+                    getString(R.string.settings_search_max_results_default));
+//            String sortingMethod = sharedPrefs.getString(
+//                    getString(R.string.settings_sorting_order_key),
+//                    getString(R.string.settings_sorting_order_default));
+            String sortingMethod = sharedPrefs.getString(
+                    getString(R.string.settings_sorting_order_key),
+                    getString(R.string.settings_sorting_order_default)
+            );
+            Uri baseUri = Uri.parse(FULL_QUERY_URL);
+            Uri.Builder uriBuilder = baseUri.buildUpon();
+            uriBuilder.appendQueryParameter("maxResults", maxResults);
+            uriBuilder.appendQueryParameter("orderBy", sortingMethod );
+            Log.v("URIBUILDER     ", "the value of the uri is:  " + uriBuilder);
+            FULL_QUERY_URL = uriBuilder.toString();
             getLoaderManager().restartLoader(0, null, this);
         } else {
             final ListView bookListView = (ListView) findViewById(R.id.book_list);

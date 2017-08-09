@@ -4,16 +4,17 @@
     android:title="@string/settings_title">
 
     <EditTextPreference
-        android:defaultValue="@string/settings_author_name_default"
-        android:inputType="text"
-        android:key="@string/settings_author_search_key"
-        android:selectAllOnFocus="true"
-        android:title="@string/settings_author_search_label" />
-    <EditTextPreference
         android:defaultValue="@string/settings_search_max_results_default"
         android:inputType="number"
         android:key="@string/settings_search_max_results_key"
         android:selectAllOnFocus="true"
         android:title="@string/settings_search_max_results_label" />
+
+    <ListPreference
+        android:defaultValue="@string/settings_sorting_order_by_relevance_value"
+        android:entries="@array/settings_search_by_labels"
+        android:entryValues="@array/settings_search_by_values"
+        android:key="@string/settings_sorting_order_key"
+        android:title="@string/settings_sorting_order_label"/>
 
 </PreferenceScreen>
